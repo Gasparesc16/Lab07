@@ -10,15 +10,6 @@ import java.util.List;
 public class WordDAO {
 
 	/*
-	 * Ritorna tutte le parole di una data lunghezza che differiscono per un solo carattere
-	 */
-	public List<String> getAllSimilarWords(String parola, int numeroLettere) {
-		
-		System.out.println("WordDAO -- TODO");
-		return new ArrayList<String>();
-	}
-
-	/*
 	 * Ritorna tutte le parole di una data lunghezza
 	 */
 	public List<String> getAllWordsFixedLength(int numeroLettere) {
@@ -45,6 +36,15 @@ public class WordDAO {
 			System.out.println("Errore connessione al database");
 			throw new RuntimeException("Error Connection Database");
 		}
+	}
+	
+	/*
+	 * Ritorna tutte le parole di una data lunghezza che differiscono per un solo carattere
+	 */
+	public List<String> getAllSimilarWords(String parola, int numeroLettere) {
+		
+		System.out.println("WordDAO -- TODO");
+		return new ArrayList<String>();
 	}
 
 }
