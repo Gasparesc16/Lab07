@@ -35,20 +35,19 @@ public class DizionarioController {
 
 	@FXML
 	void doReset(ActionEvent event) {
-		txtResult.setText("Reset!");
+		txtResult.clear();
 	}
 
 	@FXML
 	void doGeneraGrafo(ActionEvent event) {
 		
+		// Estraggo la lunghezza di input
 		String numeroLettere = inputNumeroLettere.getText();
 		
 		int lun;
 
 		try {
 			
-			
-			// Estraggo la lunghezza di input
 			lun = Integer.parseInt(numeroLettere);
 			
 			if(lun == 0){
@@ -71,16 +70,24 @@ public class DizionarioController {
 	@FXML
 	void doTrovaGradoMax(ActionEvent event) {
 		
+		
+		txtResult.appendText("Grado massimo:\n");
+		txtResult.appendText(model.findMaxDegree() + "\n");
+		
+		/*
 		try {
-			txtResult.setText("Controller -- TODO!");
+			//txtResult.setText("Controller -- TODO!");
 
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
 		}
+		
+		*/
 	}
 
 	@FXML
 	void doTrovaVicini(ActionEvent event) {
+		
 		
 		// Estraggo la stringa
 		String s = inputParola.getText();

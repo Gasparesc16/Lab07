@@ -1,9 +1,10 @@
 package it.polito.tdp.dizionario.model;
 
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 import java.util.List;
 
-import org.jgrapht.Graph;
+
 import org.jgrapht.Graphs;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
@@ -14,23 +15,30 @@ import it.polito.tdp.dizionario.db.WordDAO;
 public class Model {
 	
 	private List<String> parole;
+	private List<String> vicini;
 	
 	private int lunghezza = 0;
 	
-	private WordDAO wordDao;
-	
 	private UndirectedGraph <String, DefaultEdge> grafo;
 	
+	
+	public Model() {
+		
+		parole = new LinkedList<String>();
+		vicini = new LinkedList<String>();
+		
+	}
 
 	public List<String> createGraph(int numeroLettere) {
 		
-		wordDao = new WordDAO();
+		WordDAO wordDao = new WordDAO();
 		
 		if(numeroLettere != lunghezza){
 			
 			lunghezza = numeroLettere;
 		
-		parole = new ArrayList<String>(wordDao.getAllWordsFixedLength(numeroLettere));
+		parole.clear();
+		parole.addAll(wordDao.getAllWordsFixedLength(numeroLettere));
 		
 		//System.out.println(parole);
 		
@@ -81,12 +89,38 @@ public class Model {
 	}
 
 	public List<String> displayNeighbours(String parolaInserita) {
+		
+		vicini.clear();
+		vicini.addAll(Graphs.neighborListOf(grafo, parolaInserita));
 
-		return Graphs.neighborListOf(grafo, parolaInserita);
+		return vicini;
 	}
 
 	public String findMaxDegree() {
-		System.out.println("Model -- TODO");
-		return "";
+		
+		String st = "";
+		
+		String risultato = "";
+		
+		int grado = 0;
+		
+		
+		for(int i=0; i<vicini.size();i++){
+			
+			String s = vicini.get(i);
+			
+			if(grafo.degreeOf(s) > grado){
+				grado = grafo.degreeOf(s);
+				st = s;
+			}
+			
+		}
+		
+		risultato += st + ": " + "grado " + grado;
+		
+		
+		//System.out.println("Model -- TODO");
+		
+		return risultato;
 	}
 }
