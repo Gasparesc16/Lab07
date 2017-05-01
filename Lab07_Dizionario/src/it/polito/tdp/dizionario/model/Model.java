@@ -1,6 +1,7 @@
 package it.polito.tdp.dizionario.model;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.jgrapht.Graphs;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.traverse.BreadthFirstIterator;
 
 import it.polito.tdp.dizionario.db.WordDAO;
 
@@ -122,5 +124,19 @@ public class Model {
 		//System.out.println("Model -- TODO");
 		
 		return risultato;
+	}
+
+	public List<String> getTutti(String s) {
+		
+		// Definisco un iteratore per un visita in ampiezza
+		BreadthFirstIterator<String, DefaultEdge> bfs = new BreadthFirstIterator<String, DefaultEdge>(grafo,s);
+		
+
+		List<String> tutti = new ArrayList<String>();
+		
+		while(bfs.hasNext())
+			tutti.add(bfs.next());
+		
+		return tutti;
 	}
 }
